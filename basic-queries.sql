@@ -19,13 +19,12 @@ ORDER BY unitPrice ASC;
 
 SELECT productID, productName, unitPrice
 FROM products
-WHERE productID = unitPrice = 7.50 or unitPrice <= 7.50
+WHERE unitPrice <= 7.50
 ORDER BY unitPrice DESC;
 
 -- 5. What are the products that we carry where we have at least 100 units on hand? Order them in descending order by price
 
-SELECT productID, productName, unitPrice, UnitsOnOrder
-FROM products
+SELECT productID, productName, unitPrice, UnitsOnOrder -- WE DON'T NEED THIS INO
 WHERE UnitsOnOrder >= 100
 ORDER BY unitPrice DESC;
 
@@ -33,7 +32,7 @@ ORDER BY unitPrice DESC;
 
 -- 6. What are the products that we carry where we have at least 100 units on hand? Order them in descending order by price. If two or more have the same price, list those in ascending order by product name
 
-SELECT productID, productName, unitPrice, UnitsOnOrder
+SELECT * -- productID, productName, unitPrice, UnitsOnOrder
 FROM products
 WHERE UnitsOnOrder >= 100
 ORDER BY unitPrice DESC, productName ASC;
@@ -41,13 +40,66 @@ ORDER BY unitPrice DESC, productName ASC;
 -- 7. What are the products that we carry where we have no units on hand, but 1
 -- or more units of them on backorder? Order them by product name
 
-SELECT productID, productName, unitPrice, UnitsOnOrder
+SELECT *
 FROM products
-WHERE UnitsOnOrder <= 1
+WHERE UnitsInStock = 0 AND UnitsInStock > 0 
 ORDER BY productName ASC;
 
 -- 8. What is the name of the table that holds the types (categories) of the items Northwind sells?
 
 SELECT *
-FROM categories
+FROM categories;
+
+-- 9. Write a query that lists all of the columns and all the rows of the categories table? What is the category id of seafood?
+SELECT *
+FROM categories;
+
+-- 10. Examine the Products table. How does it identify the type (category) of each item sold? 
+-- Write a query to list all of the seafood items we carry.
+SELECT *
+FROM products
+WHERE CategoryID = "8";
+
+-- 11. What are the first and last names of all of the Northwind employees?
+
+SELECT FirstName, LastName
+FROM employees;
+
+-- 12. What employees have "manager" in their titles?
+
+SELECT Title
+FROM employees
+WHERE Title = "Manager";
+
+
+-- 13. List the distinct job titles in employees.
+
+SELECT distinct(title)
+FROM employees;
+
+-- 14. What employees have a salary that is between $200 0 and $2500?
+
+SELECT *
+FROM employees
+WHERE Salary BETWEEN 2000 AND  2500;
+
+-- 15. List all the information about all of Northwind's suppliers.
+
+SELECT * 
+FROM suppliers;
+
+-- 16. Examine the Products table. How do you know what supplier supplies
+-- each product? Write a query to list all the items that "Tokyo Traders" supplies to Northwind
+
+SELECT * 
+FROM suppliers
+WHERE CompanyName = "Tokyo Traders" OR SupplierID = "4";
+
+-- (OPTIONAL) EXERCISE 3
+
+/*The sqlbolt.com web site has some nice tutorial and practice exercises that
+build up to more complex situations.
+Anytime you finish an exercise early, go there are start working your way
+through the exercises.*/
+
 
